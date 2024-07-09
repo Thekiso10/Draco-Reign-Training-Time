@@ -1,6 +1,3 @@
-// index.js
-
-// Función para cambiar el tiempo (minutos o segundos)
 function changeTime(id, increment) {
     const input = document.getElementById(id);
     let value = parseInt(input.value, 10);
@@ -16,7 +13,6 @@ function changeTime(id, increment) {
     input.value = value.toString().padStart(2, '0');
 }
 
-// Función para cambiar el número de ciclos
 function changeCycleCount(increment) {
     const input = document.getElementById('num-cycles');
     let value = parseInt(input.value, 10);
@@ -32,9 +28,28 @@ function changeCycleCount(increment) {
     input.value = value.toString();
 }
 
-// Función para configurar el Sprint Interval Training
 function configureSIT() {
+    const sprintTime = getTimeValues('sprint');
+    const restTime = getTimeValues('rest');
+    const numCycles = parseInt(document.getElementById('num-cycles').value);
+
+    // Guardar la configuración en localStorage
+    const sitConfig = {
+        sprintTime: sprintTime,
+        restTime: restTime,
+        numCycles: numCycles,
+        warmupTime: 600 // Tiempo de calentamiento fijo en 10 minutos (600 segundos)
+    };
+
+    localStorage.setItem('sitConfig', JSON.stringify(sitConfig));
+
     startCountdown();
+}
+
+function getTimeValues(idPrefix) {
+    const minutes = parseInt(document.getElementById(`${idPrefix}-minutes`).value);
+    const seconds = parseInt(document.getElementById(`${idPrefix}-seconds`).value);
+    return minutes * 60 + seconds; // Convertir todo a segundos
 }
 
 function startCountdown() {

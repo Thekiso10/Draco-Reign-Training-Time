@@ -1,27 +1,53 @@
-document.addEventListener('DOMContentLoaded', function() {
-    startTimer(); // Inicia el temporizador automáticamente
+let timerInterval;
+document.addEventListener('DOMContentLoaded', async function () {
+    await configuration();
 });
 
-let timerInterval;
-let totalSeconds = 600; // 10 minutos en segundos
+async function configuration() {
+    const sitConfig = JSON.parse(localStorage.getItem('sitConfig'));
 
-function startTimer() {
-    clearInterval(timerInterval);
-    timerInterval = setInterval(updateTimer, 1000);
-    updateTimer(); // Actualiza el temporizador inmediatamente al iniciar
+    const numCycles = sitConfig.numCycles;
+    const warmupTime = sitConfig.warmupTime;
+    const sprintTime = sitConfig.sprintTime;
+    const restTime = sitConfig.restTime;
+
+    //First Warmup time
+    await startTimer(warmupTime, 'Calentamiento');
+
+    for (let i = 0; i < numCycles; i++) {
+        await startTimer(sprintTime, 'Sprint');
+        await startTimer(restTime, 'Descanso');
+    }
+
+    window.location.href = 'index.html';
 }
 
-function updateTimer() {
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
+function startTimer(timer, windowText) {
+    return new Promise(resolve => {
+        // Configurar el temporizador
+        updateTimerDisplay(timer);
+        updateTimerLabel(windowText);
+
+        let timerInterval = setInterval(() => {
+            timer--;
+            updateTimerDisplay(timer);
+
+            if (timer === -1) {
+                clearInterval(timerInterval);
+                resolve();
+            }
+        }, 1000);
+    });
+}
+
+function updateTimerDisplay(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainderSeconds = seconds % 60;
 
     document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = remainderSeconds.toString().padStart(2, '0');
+}
 
-    totalSeconds--;
-
-    if (totalSeconds < 0) {
-        clearInterval(timerInterval);
-        alert('¡Tiempo de calentamiento terminado!');
-    }
+function updateTimerLabel(label) {
+    document.getElementById('label-timer').textContent = label;
 }
