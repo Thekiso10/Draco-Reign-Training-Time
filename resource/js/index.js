@@ -34,13 +34,36 @@ function changeCycleCount(increment) {
 
 // Función para configurar el Sprint Interval Training
 function configureSIT() {
-    const sprintMinutes = document.getElementById('sprint-minutes').value;
-    const sprintSeconds = document.getElementById('sprint-seconds').value;
-    const restMinutes = document.getElementById('rest-minutes').value;
-    const restSeconds = document.getElementById('rest-seconds').value;
-    const numCycles = document.getElementById('num-cycles').value;
+    startCountdown();
+}
 
-    console.log(`Configuración: Sprint ${sprintMinutes}:${sprintSeconds}, Descanso ${restMinutes}:${restSeconds}, Ciclos ${numCycles}`);
+function startCountdown() {
+    let countdown = 15;
+    let countdownInterval = setInterval(function() {
+        showPopup(`Configurando... Redirigiendo en ${countdown} segundos.`);
+        countdown--;
+        if (countdown < 0) {
+            clearInterval(countdownInterval);
+            redirectToTimerPage();
+            closePopup();
+        }
+    }, 1000);
+}
+
+function showPopup(message) {
+    const popup = document.getElementById('popup');
+    const popupMessage = document.getElementById('popup-message');
+    popup.style.display = 'block';
+    popupMessage.textContent = message;
+}
+
+function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none';
+}
+
+function redirectToTimerPage() {
+    window.location.href = "timer.html";
 }
 
 // Event listeners para botones de aumento y reducción

@@ -25,10 +25,3 @@ function updateTimer() {
         alert('¡Tiempo de calentamiento terminado!');
     }
 }
-
-function resetTimer() {
-    clearInterval(timerInterval);
-    totalSeconds = 600; // Reinicia a 10 minutos
-    document.getElementById('minutes').textContent = '10';
-    document.getElementById('seconds').textContent = '00';
-}
