@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de SIT</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.cdnfonts.com/css/digital-7-mono" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/dungeon-depths" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Configuración de Sprint Interval Training</h1>
+    <form id="sit-form">
+
+        <div class="input-group">
+            <div class="input-block">
+                <label for="sprint-time">Tiempo de Sprint:</label>
+                <div class="time-input">
+                    <div class="time-section">
+                        <button type="button" onclick="changeTime('sprint-minutes', 1)">▲</button>
+                        <input type="text" id="sprint-minutes" value="00" readonly>
+                        <button type="button" onclick="changeTime('sprint-minutes', -1)">▼</button>
+                    </div>
+                    <span class="time-divider">:</span>
+                    <div class="time-section">
+                        <button type="button" onclick="changeTime('sprint-seconds', 5)">▲</button>
+                        <input type="text" id="sprint-seconds" value="00" readonly>
+                        <button type="button" onclick="changeTime('sprint-seconds', -5)">▼</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-block">
+                <label for="rest-time">Tiempo de Descanso:</label>
+                <div class="time-input">
+                    <div class="time-section">
+                        <button type="button" onclick="changeTime('rest-minutes', 1)">▲</button>
+                        <input type="text" id="rest-minutes" value="00" readonly>
+                        <button type="button" onclick="changeTime('rest-minutes', -1)">▼</button>
+                    </div>
+                    <span class="time-divider">:</span>
+                    <div class="time-section">
+                        <button type="button" onclick="changeTime('rest-seconds', 5)">▲</button>
+                        <input type="text" id="rest-seconds" value="00" readonly>
+                        <button type="button" onclick="changeTime('rest-seconds', -5)">▼</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-block">
+                <label for="num-cycles">Número de Ciclos:</label>
+                <div class="cycle-input">
+                    <button type="button" class="cycle-button" onclick="changeCycleCount(-1)">-</button>
+                    <input type="number" id="num-cycles" value="4" min="1" max="99">
+                    <button type="button" class="cycle-button" onclick="changeCycleCount(1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="config-button" onclick="configureSIT()">Configurar</button>
+    </form>
+    <div id="result"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
