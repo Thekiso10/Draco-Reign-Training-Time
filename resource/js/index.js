@@ -1,4 +1,4 @@
-// script.js
+// index.js
 
 // Función para cambiar el tiempo (minutos o segundos)
 function changeTime(id, increment) {
