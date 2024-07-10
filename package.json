@@ -1,7 +1,7 @@
 {
-  "name": "vanilla",
-  "private": true,
-  "version": "0.0.0",
+  "name": "draco-reign-training-time",
+  "private": false,
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
