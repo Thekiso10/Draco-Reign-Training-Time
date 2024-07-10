@@ -18,7 +18,7 @@ window.configureSIT = function () {
         sprintTime: sprintTime,
         restTime: restTime,
         numCycles: numCycles,
-        warmupTime: TIMER_DURATION.countdown // Tiempo de calentamiento fijo en 10 minutos (600 segundos)
+        warmupTime: TIMER_DURATION.warmupTime
     };
 
     localStorage.setItem(LOCAL_STORAGE.nameStorage, JSON.stringify(sitConfig));
