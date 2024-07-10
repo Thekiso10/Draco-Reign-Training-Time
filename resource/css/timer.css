@@ -1,14 +1,13 @@
-/* timer.css */
-
-/* Estilos adicionales en línea para ocupar toda la pantalla */
 body, html {
     height: 100%;
+    width: 100%;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #121212;
+    background-color: #111418;
     color: #e0e0e0;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .container {
@@ -42,20 +41,18 @@ h1 {
     color: #e0e0e0;
 }
 
-.start-button, .reset-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-    margin-right: 10px;
-    outline: none;
-    transition: background-color 0.3s;
+@keyframes pulse {
+    0% {
+        background-color: #111418;
+    }
+    50% {
+        background-color: #7f0000;
+    }
+    100% {
+        background-color: #111418;
+    }
 }
 
-.start-button:hover, .reset-button:hover {
-    background-color: #0056b3;
+.pulse {
+    animation: pulse 1s infinite;
 }

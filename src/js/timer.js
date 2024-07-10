@@ -1,10 +1,11 @@
-let timerInterval;
+import { TIMER_DURATION, LOCAL_STORAGE, TEXT_TIMER } from '../const/config'
+
 document.addEventListener('DOMContentLoaded', async function () {
     await configuration();
 });
 
 async function configuration() {
-    const sitConfig = JSON.parse(localStorage.getItem('sitConfig'));
+    const sitConfig = JSON.parse(localStorage.getItem(LOCAL_STORAGE.nameStorage));
 
     const numCycles = sitConfig.numCycles;
     const warmupTime = sitConfig.warmupTime;
@@ -12,14 +13,14 @@ async function configuration() {
     const restTime = sitConfig.restTime;
 
     //First Warmup time
-    await startTimer(warmupTime, 'Calentamiento');
+    await startTimer(warmupTime, TEXT_TIMER.warmup);
 
     for (let i = 0; i < numCycles; i++) {
-        await startTimer(sprintTime, 'Sprint');
-        await startTimer(restTime, 'Descanso');
+        await startTimer(sprintTime, TEXT_TIMER.sprint);
+        await startTimer(restTime, TEXT_TIMER.rest);
     }
 
-    window.location.href = 'index.html';
+    window.location.href = '/';
 }
 
 function startTimer(timer, windowText) {
@@ -32,8 +33,11 @@ function startTimer(timer, windowText) {
             timer--;
             updateTimerDisplay(timer);
 
-            if (timer === -1) {
+            if (timer <= TIMER_DURATION.startPulse && timer > TIMER_DURATION.finishTime) {
+                document.body.classList.add('pulse');
+            } else if (timer === TIMER_DURATION.finishTime) {
                 clearInterval(timerInterval);
+                document.body.classList.remove('pulse');
                 resolve();
             }
         }, 1000);
