@@ -1,0 +1,66 @@
+$font-family: 'Open Sans', sans-serif;
+$font-family-digital: 'Digital-7', sans-serif;
+$font-family-dungeon: 'Dungeon Depths', sans-serif;
+$background-color-dark: #111418;
+$background-color-light: #333;
+$color-light: #e0e0e0;
+$color-white: #ffffff;
+
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $background-color-dark;
+  color: $color-light;
+  font-family: $font-family;
+}
+
+.container {
+  text-align: center;
+}
+
+.timer {
+  font-size: 20em;
+  font-family: $font-family-digital; /* Fuente digital */
+  display: flex;
+  align-items: center;
+}
+
+h1 {
+  font-family: $font-family-dungeon; /* Fuente digital */
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: $color-white;
+}
+
+#minutes, #seconds {
+  background-color: $background-color-light;
+  padding: 15px 30px;
+  border-radius: 5px;
+  margin: 0 10px;
+}
+
+.time-divider {
+  font-size: 72px; /* Tamaño grande para simular un reloj digital */
+  font-family: $font-family-digital; /* Fuente digital */
+  color: $color-light;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: $background-color-dark;
+  }
+  50% {
+    background-color: #7f0000;
+  }
+  100% {
+    background-color: $background-color-dark;
+  }
+}
+
+.pulse {
+  animation: pulse 1s infinite;
+}
