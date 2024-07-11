@@ -20,7 +20,7 @@ async function configuration() {
         await startTimer(restTime, TEXT_TIMER.rest);
     }
 
-    window.location.href = '/';
+    window.location.href = '../../index.html';
 }
 
 function startTimer(timer, windowText) {
