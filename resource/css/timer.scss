@@ -6,6 +6,29 @@ $background-color-light: #333;
 $color-light: #e0e0e0;
 $color-white: #ffffff;
 
+$breakpoints: (
+        'small': 440px,
+        'medium': 930px
+);
+
+// Mixin para manejar los media queries
+@mixin for-size($max-breakpoint, $min-breakpoint: null) {
+  @if map-has-key($breakpoints, $max-breakpoint) {
+    @if $min-breakpoint and map-has-key($breakpoints, $max-breakpoint) {
+      @media (min-width: map-get($breakpoints, $min-breakpoint)) and (max-width: map-get($breakpoints, $max-breakpoint)) {
+        @content;
+      }
+    } @else {
+      @media (max-width: map-get($breakpoints, $max-breakpoint)) {
+        @content;
+      }
+    }
+  } @else {
+    @warn "No se encontró el breakpoint '#{$min-breakpoint}' en la lista de breakpoints.";
+  }
+}
+
+
 body, html {
   height: 100%;
   width: 100%;
@@ -27,6 +50,14 @@ body, html {
   font-family: $font-family-digital; /* Fuente digital */
   display: flex;
   align-items: center;
+
+  @include for-size('small') {
+    font-size: 6em;
+  }
+
+  @include for-size('medium', 'small') {
+    font-size: 14em;
+  }
 }
 
 h1 {
@@ -34,6 +65,25 @@ h1 {
   font-size: 3em;
   margin-bottom: 20px;
   color: $color-white;
+
+  #label-timer {
+
+    @include for-size('small') {
+      font-size: 1.25em;
+    }
+
+    @include for-size('medium', 'small') {
+      font-size: 1em;
+    }
+  }
+
+  @include for-size('small') {
+    font-size: 1.25em;
+  }
+
+  @include for-size('medium', 'small') {
+    font-size: 2em;
+  }
 }
 
 #minutes, #seconds {
@@ -41,6 +91,10 @@ h1 {
   padding: 15px 30px;
   border-radius: 5px;
   margin: 0 10px;
+
+  @include for-size('small') {
+    width: 100%;
+  }
 }
 
 .time-divider {
