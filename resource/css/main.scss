@@ -1,0 +1,225 @@
+$font-family: 'Open Sans', sans-serif;
+$font-weight-light: 200;
+$font-weight-medium: 500;
+$background-color-dark: #111418;
+$background-color-light: #2A343E;
+$background-color-input: #080A0C;
+$background-color-button: #333;
+$background-color-cycle-button: #2990C4;
+$background-color-cycle-button-hover: #68C8FF;
+$background-color-config-button: #007bff;
+$background-color-config-button-hover: #0056b3;
+$color-light: #e0e0e0;
+$color-dark: #080A0C;
+$color-white: #ffffff;
+
+$breakpoints: (
+        'small': 440px
+);
+
+// Mixin para manejar los media queries
+@mixin for-size($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "No se encontró el breakpoint '#{$breakpoint}' en la lista de breakpoints.";
+  }
+}
+
+body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-family;
+  font-weight: $font-weight-light;
+  background-color: $background-color-dark;
+  color: $color-light;
+  height: 70vh;
+  margin: 0;
+}
+
+header {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $background-color-light;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+// Uso del mixin en tu código SCSS
+.container {
+  background-color: $background-color-light;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  width: 800px;
+  text-align: center;
+}
+
+#logo {
+  max-width: 200px;
+  height: auto;
+}
+
+h1 {
+  font-family: $font-family;
+  font-weight: $font-weight-medium;
+  margin-bottom: 20px;
+  color: $color-white;
+}
+
+.input-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.input-block {
+  width: 43%;
+  background-color: $background-color-input;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: $color-white;
+    font-size: 16px;
+  }
+}
+
+.time-input, .cycle-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.time-section, .cycle-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    width: 50px;
+    height: 50px;
+    margin: 5px 0;
+    padding: 0;
+    background-color: $background-color-button;
+    color: $color-light;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #555;
+    }
+
+    img {
+      width: 80%;
+    }
+
+    @include for-size('small') {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px 0;
+    background-color: $background-color-button;
+    color: $color-light;
+    font-size: 36px; /* Tamaño grande para simular un reloj digital */
+    font-family: 'Digital-7', sans-serif; /* Fuente digital */
+    outline: none;
+
+    @include for-size('small') {
+      width: 40px;
+    }
+  }
+}
+
+.cycle-input {
+  flex-direction: row;
+
+  .cycle-button {
+    background-color: $background-color-cycle-button;
+    color: $color-dark;
+    transition: background-color 1s;
+
+    &:hover {
+      background-color: $background-color-cycle-button-hover;
+    }
+
+    img {
+      width: 50%;
+    }
+  }
+}
+
+button.config-button {
+  background-color: $background-color-config-button;
+  color: $color-white;
+  border: none;
+  margin-top: 20px;
+  padding: 15px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  outline: none;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $background-color-config-button-hover;
+  }
+}
+
+.time-divider {
+  display: flex;
+  align-items: center;
+  font-size: 36px;
+  font-family: 'Digital-7', sans-serif;
+  color: $color-light;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+
+  .popup-content {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+
+  .popup-message {
+    font-size: 24px;
+    color: $color-white;
+    font-family: $font-family; /* Opcional: Cambia la fuente si lo deseas */
+  }
+}
